@@ -20,9 +20,8 @@
             margin: 0; padding: 0;
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(107, 17, 203, 0.678) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(142, 30, 212, 0.322) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(10, 10, 20, 1) 0px, transparent 100%);
+                radial-gradient(at 0% 0%, rgba(107, 17, 203, 0.6) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(142, 30, 212, 0.3) 0px, transparent 50%);
             background-attachment: fixed;
             color: var(--text-main);
             font-family: 'Segoe UI', sans-serif;
@@ -36,6 +35,7 @@
         .bio-text { flex: 1; min-width: 300px; }
         .bio-text h1 { font-size: 3.5rem; margin: 0; }
         .bio-text .highlight { color: var(--purple-glow); text-shadow: 0 0 15px rgba(160, 32, 240, 0.5); }
+        
         .glass-parent { width: 320px; height: 380px; perspective: 1000px; }
         .glass-card { 
             height: 100%; border-radius: 30px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
@@ -46,86 +46,90 @@
         .glass-content { position: relative; z-index: 2; transform: translateZ(80px); text-align: center; padding: 20px; }
         .glass-parent:hover .glass-card { transform: rotateY(20deg) rotateX(10deg); border-color: var(--purple-glow); box-shadow: 0 0 30px rgba(160, 32, 240, 0.3); }
 
-        /* TECH CARDS INDIVIDUAIS - EFEITO GLASS 3D */
-        .tech-stack-section {
-            margin: 100px 0;
-        }
-
-        .tech-stack-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--accent-lilac);
-            margin-bottom: 60px;
-        }
+        /* card de linguagens */
+        .tech-stack-section { margin: 100px 0; }
+        .tech-stack-section h2 { text-align: center; font-size: 2.5rem; color: var(--accent-lilac); margin-bottom: 60px; }
 
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
-            padding: 20px;
+            gap: 40px; 
+            padding: 30px;
+            justify-items: center;
         }
 
         .tech-card-individual {
             width: 100%;
-            height: 220px;
+            height: 240px;
             perspective: 1000px;
         }
 
         .tech-glass-card {
             height: 100%;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            transition: transform 0.6s ease;
-            transform-style: preserve-3d;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .tech-glass-overlay {
-            position: absolute;
-            inset: 12px;
+            padding-top: 50px;
+            /* Adicionada borda e arredondamento */
+            border: 1px solid rgba(160, 32, 240, 0.3); 
             border-radius: 20px;
-            background: rgba(106, 17, 203, 0.1);
-            transform: translateZ(40px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .tech-glass-content {
-            position: relative;
-            z-index: 2;
-            transform: translateZ(80px);
-            text-align: center;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            
+            transform-style: preserve-3d;
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.05) 18.75%, transparent 0 31.25%, transparent 0),
+                        repeating-linear-gradient(45deg, rgba(160, 32, 240, 0.02) -6.25% 6.25%, rgba(255,255,255,0.01) 0 18.75%);
+            background-size: 60px 60px;
+            background-color: rgba(15, 15, 27, 0.8);
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 30px -10px;
+            transition: all 0.5s ease-in-out;
         }
 
         .tech-card-individual:hover .tech-glass-card {
-            transform: rotateY(20deg) rotateX(10deg);
+            background-position: -100px 100px, -100px 100px;
+            transform: rotate3d(0.5, 1, 0, 25deg);
+            /* Borda brilha no hover */
             border-color: var(--purple-glow);
-            box-shadow: 0 0 30px rgba(160, 32, 240, 0.3);
+            box-shadow: 0 0 20px rgba(160, 32, 240, 0.2);
+        }
+
+        .tech-glass-content {
+            background: transparent;
+            transition: all 0.5s ease-in-out;
+            padding: 20px;
+            transform-style: preserve-3d;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
 
         .tech-glass-content i {
+            display: inline-block;
             font-size: 3.5rem;
             color: var(--purple-glow);
-            filter: drop-shadow(0 0 15px var(--purple-glow));
+            filter: drop-shadow(0 0 10px var(--purple-glow));
+            transition: all 0.5s ease-in-out;
+            transform: translate3d(0px, 0px, 50px);
         }
 
-        .tech-glass-content .tech-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
+        .tech-name {
+            display: block;
+            margin-top: 20px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 900;
+            transition: all 0.5s ease-in-out;
+            transform: translate3d(0px, 0px, 30px);
         }
 
-        /* PROJECTS */
+        .tech-card-individual:hover .tech-glass-content i {
+            transform: translate3d(0px, 0px, 100px);
+            color: var(--accent-lilac);
+        }
+
+        .tech-card-individual:hover .tech-name {
+            transform: translate3d(0px, 0px, 70px);
+        }
+
+        /* PROJECTS SECTION */
         .projects-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 50px; justify-items: center; margin-top: 60px;
@@ -148,24 +152,12 @@
             background: linear-gradient(346.80deg, #0f0f1b 30%, #1a1a2e 30%, rgba(160, 32, 240, 0) 30%, rgba(160, 32, 240, 0) 32%, #0f0f1b 32%, #0f0f1b 35%, transparent 35%);
         }
 
-        .card-border strong {
-            display: flex; height: 100%; width: 100%; text-transform: uppercase;
-            font-size: 1.2rem; font-weight: 900; align-items: center; letter-spacing: 0.2rem;
-        }
-
-        #text-border {
-            position: absolute; top: 15.35rem; left: 1.5rem; width: 100%; height: fit-content;
-            color: transparent; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: rgb(255, 255, 255);
-            background: linear-gradient(90deg, transparent 100%, #ffffff 65%);
-            background-clip: text; -webkit-background-clip: text;
-        }
-
         #text-ext {
             z-index: 1; display: flex; position: absolute; inset: 1rem;
             -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: #ffffff;
             background: linear-gradient(346.80deg, #fff 30%, #fff 30%, #fff 32%, #fff 35%);
             background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            padding: 9rem 0 0 0.5rem;
+            padding: 9rem 0 0 0.5rem; text-transform: uppercase; font-weight: 900;
         }
 
         .marquee {
@@ -203,15 +195,9 @@
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); background-color: #0f0f1b;
         }
 
-        .mist-container { position: absolute; width: 100%; height: 150px; overflow: hidden; filter: blur(1.5rem); top: 60%; left: 0; z-index: -1; }
-        .mist { width: 100%; height: 100%; background: radial-gradient(circle, rgba(160, 32, 240, 0.4) 10%, transparent 60%); animation: mist 10s infinite both; }
-
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes slide { from { transform: translate3d(var(--move-initial), 0, 0); } to { transform: translate3d(var(--move-final), 0, 0); } }
-        @keyframes mist { 0% { transform: translateX(-20%) scaleY(0.7); opacity: 0.3; } 50% { transform: translateX(20%) scaleY(1.2); opacity: 0.6; } 100% { transform: translateX(-20%) scaleY(0.7); opacity: 0.3; } }
         @keyframes pulse_purple { 0%, 100% { box-shadow: 0 0 1rem rgba(160, 32, 240, 0.4); } 70% { box-shadow: 0 0 2rem rgba(160, 32, 240, 0.6); } }
-
-        .card-border:hover { transform: translateY(-10px) rotateY(10deg); }
 
         /* MODAL */
         .modal {
@@ -225,6 +211,13 @@
         }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--text-dim); }
         .tech-pill { background: var(--purple-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; margin: 4px; display: inline-block; font-weight: bold; }
+
+        .profile-img-container {
+            width: 120px; height: 120px; margin: 0 auto; border-radius: 50%;
+            border: 3px solid var(--purple-glow); overflow: hidden;
+            box-shadow: 0 0 20px rgba(160, 32, 240, 0.6); background: var(--bg-dark);
+        }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -235,7 +228,7 @@
                 <h1>Felipe <span class="highlight">Fernandes</span></h1>
                 <h3 style="color: var(--accent-lilac); margin-top: 10px;">Full Stack & Prompt Engineer</h3>
                 <p style="color: var(--text-dim); font-size: 1.2rem; margin: 25px 0;">
-                    Sou Desenvolvedor Full Stack com foco em IA, automação e sistemas web. Atuo com suporte e desenvolvimento de soluções inteligentes, incluindo engenharia de prompt, sistemas internos e dashboards para otimização de processos.
+                    Desenvolvedor focado em IA e soluções Full Stack. Especialista em automação e dashboards inteligentes.
                 </p>
             </div>
 
@@ -243,138 +236,26 @@
                 <div class="glass-card">
                     <div class="glass-overlay"></div>
                     <div class="glass-content">
-                        <i class="fa-solid fa-robot" style="font-size: 4rem; color: var(--purple-glow); filter: drop-shadow(0 0 15px var(--purple-glow));"></i>
-                        <h2 style="margin: 20px 0;">AI Specialist</h2>
+                        <div class="profile-img-container" style="margin-bottom: 20px;">
+                            <img src="Captura de tela 2026-01-16 135140.png" alt="Felipe Fernandes" class="profile-img">
+                        </div>
+                        <h2 style="margin: 10px 0;">AI Specialist</h2>
                         <p style="color: var(--text-dim);">Engenharia de Prompt e Sistemas Autônomos.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TECH STACK COM CARDS INDIVIDUAIS -->
         <section class="tech-stack-section">
             <h2>Tech Stack & Skills</h2>
-            <div class="tech-grid">
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-js"></i>
-                            <span class="tech-name">JavaScript</span>
-                        </div>
-                    </div>
+            <div class="tech-grid" id="tech-stack-grid">
                 </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-solid fa-code"></i>
-                            <span class="tech-name">TypeScript</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-react"></i>
-                            <span class="tech-name">React</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-node-js"></i>
-                            <span class="tech-name">Node.js</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-python"></i>
-                            <span class="tech-name">Python</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-solid fa-database"></i>
-                            <span class="tech-name">Supabase</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-solid fa-server"></i>
-                            <span class="tech-name">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-html5"></i>
-                            <span class="tech-name">HTML</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-css3-alt"></i>
-                            <span class="tech-name">CSS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-solid fa-wind"></i>
-                            <span class="tech-name">TailwindCSS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-brands fa-github"></i>
-                            <span class="tech-name">Git/GitHub</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-overlay"></div>
-                        <div class="tech-glass-content">
-                            <i class="fa-solid fa-brain"></i>
-                            <span class="tech-name">Eng. Prompt</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <section style="margin-top: 100px;">
             <h2 style="text-align: center; font-size: 2.5rem; color: var(--accent-lilac); margin-bottom: 50px;">Projetos</h2>
             <div class="projects-grid" id="projects-container"></div>
         </section>
-        
-        <div style="text-align: center; margin: 80px 0;">
-            <a href="https://github.com/Felipe-Fernandes97" target="_blank" style="color: white; font-size: 2rem; margin: 0 20px;"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/felipe-fernandes-467435238/" target="_blank" style="color: white; font-size: 2rem; margin: 0 20px;"><i class="fa-brands fa-linkedin-in"></i></a>
-        </div>
     </div>
 
     <div class="modal" id="projectModal">
@@ -388,46 +269,66 @@
     </div>
 
     <script>
-        const projects = [
-            { title: "Talents-MultiOne", icon: "fa-solid fa-users-gear", desc: "Talents-MultiOne é um sistema SaaS completo de recrutamento e gestão de candidatos, desenvolvido com NestJS no backend e Next.js no frontend. Oferece autenticação JWT, multi-tenancy por empresa, controle de permissões, gerenciamento de usuários, empresas, candidatos e vagas, além de dashboard com estatísticas. Utiliza PostgreSQL, Prisma e foco em segurança, escalabilidade e performance.", techs: ["NestJS", "Next.js", "Prisma", "TypeScript", "Axios"] },
-            { title: "DashBoard", icon: "fa-solid fa-chart-line", desc: "Sistema web para cadastro e gerenciamento de empresas, com registro e acompanhamento de atendimentos. Possui visualização rápida do último atendimento por empresa, exportação de históricos para Excel, interface responsiva e autenticação segura via Supabase Auth.", techs: ["JavaScript", "Python", "Supabase", "HTML/CSS"] },
-            { title: "Saas MacDonald", icon: "fa-solid fa-utensils", desc: "SaaS de totem de autoatendimento para o McDonald's, desenvolvido para realização de pedidos de forma intuitiva e rápida. O sistema permite navegação fácil pelo cardápio, personalização de pedidos, fluxo otimizado de checkout e interface responsiva, focada em usabilidade, performance e experiência do usuário.", techs: ["TypeScript", "React", "Tailwind", "Prisma",  "Next"] },
-            { title: "Central Aviso", icon: "fa-solid fa-bullhorn", desc: "Aplicação web com design responsivo e animações 3D interativas, integrada a múltiplos canais de comunicação. Oferece experiência imersiva com efeitos visuais, alta performance, compatibilidade entre navegadores e forte foco em UX/UI e segurança do usuário.", techs: ["JavaScript", "API","HTML/CSS"] },
-            { title: "Software-House", icon: "fa-solid fa-rocket", desc: "Site institucional de uma software house, focado em apresentar serviços, soluções tecnológicas e projetos, com design moderno, responsivo e voltado para credibilidade, usabilidade e captação de clientes.", techs: ["HTML/CSS", "JavaScript"] },
-            { title: "Pacman Web", icon: "fa-solid fa-ghost", desc: "Projeto pacman-web é um jogo do Pac-Man desenvolvido para web, com foco em interatividade, lógica de jogo e boa experiência do usuário. O projeto implementa movimentação do personagem, regras clássicas do jogo, controle de colisões e interface visual responsiva, demonstrando habilidades em desenvolvimento front-end, lógica JavaScript e estruturação de aplicações web.", techs: ["JavaScript", "Canvas", "HTML/CSS"] }
+        // Definição única das Skills
+        const skills = [
+            { name: "JavaScript", icon: "fa-brands fa-js" },
+            { name: "TypeScript", icon: "fa-solid fa-code" },
+            { name: "React", icon: "fa-brands fa-react" },
+            { name: "Node.js", icon: "fa-brands fa-node-js" },
+            { name: "Python", icon: "fa-brands fa-python" },
+            { name: "Supabase", icon: "fa-solid fa-database" },
+            { name: "Eng. Prompt", icon: "fa-solid fa-brain" },
+            { name: "Git/GitHub", icon: "fa-brands fa-github" }
         ];
 
-        const container = document.getElementById('projects-container');
+        // Definição única dos Projetos
+        const projectsList = [
+            { title: "Talents-MultiOne", icon: "fa-solid fa-users-gear", desc: "SaaS completo de recrutamento com NestJS e Next.js.", techs: ["NestJS", "Next.js", "Prisma"] },
+            { title: "DashBoard", icon: "fa-solid fa-chart-line", desc: "Sistema de gerenciamento de empresas e atendimentos.", techs: ["JavaScript", "Python", "Supabase"] },
+            { title: "Saas MacDonald", icon: "fa-solid fa-utensils", desc: "Totem de autoatendimento para pedidos rápidos.", techs: ["TypeScript", "React", "Prisma"] },
+            { title: "Central Aviso", icon: "fa-solid fa-bullhorn", desc: "App de comunicação integrada com efeitos 3D.", techs: ["JavaScript", "HTML/CSS"] },
+            { title: "Software-House", icon: "fa-solid fa-rocket", desc: "Site institucional focado em serviços B2B.", techs: ["HTML/CSS", "JavaScript"] },
+            { title: "Pacman Web", icon: "fa-solid fa-ghost", desc: "Jogo clássico com mecânicas reescritas em Canvas.", techs: ["JavaScript", "Canvas"] }
+        ];
 
-        projects.forEach((p, i) => {
-            const cardHTML = `
+        // Renderizar Skills
+        const techGrid = document.getElementById('tech-stack-grid');
+        skills.forEach(skill => {
+            techGrid.innerHTML += `
+                <div class="tech-card-individual">
+                    <div class="tech-glass-card">
+                        <div class="tech-glass-content">
+                            <i class="${skill.icon}"></i>
+                            <span class="tech-name">${skill.name}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Renderizar Projetos
+        const projContainer = document.getElementById('projects-container');
+        projectsList.forEach((p, i) => {
+            projContainer.innerHTML += `
                 <div class="card-border" onclick="openModal(${i})">
                     <div class="card-bg"> 
                         <div class="container-logo">
                             <div class="logo"></div>
-                            <div class="logo-inside">
-                                <i class="${p.icon}" style="color:var(--purple-glow); z-index:11; font-size:1.2rem;"></i>
-                            </div>
+                            <div class="logo-inside"><i class="${p.icon}" style="color:var(--purple-glow); z-index:11;"></i></div>
                         </div>
-                        <div id="blur-area"></div>
                         <div class="marquee">
                             <div class="marquee__inner">
-                                <span class="marquee-text">${p.title} ${p.title} ${p.title}</span>
+                                <span class="marquee-text">${p.title} ${p.title}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="mist-container">
-                        <div class="mist"></div>
-                    </div>
                     <strong id="text-ext">${p.title}</strong>
-                    <strong id="text-border">${p.title}</strong>
                 </div>
             `;
-            container.innerHTML += cardHTML;
         });
 
         function openModal(i) {
-            const p = projects[i];
+            const p = projectsList[i];
             document.getElementById('m-title').innerText = p.title;
             document.getElementById('m-desc').innerText = p.desc;
             document.getElementById('m-icon').className = p.icon;
