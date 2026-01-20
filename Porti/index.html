@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felipe Fernandes | Full Stack & AI Engineer</title>
+    <link rel="icon" type="image/png" href="iconSupa/icons8-supabase-48.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     
     <style>
         :root {
             --bg-dark: #050508;
-            
-            --purple-primary: #6a11cb;
-            --purple-glow: #a020f0;                 
+
+            --purple-primary: #9ca3af;
+            --purple-glow: #e5e7eb;
             --text-main: #ffffff;
             --text-dim: #a0a0b8;
-            --accent-lilac: #e0aaff;
+            --accent-lilac: #f3f4f6;
         }
 
         html {
@@ -38,7 +39,7 @@
 
         .scroll-content {
             background-color: var(--bg-dark);
-            background-image: url('bg/background.jpg');
+            background-image: url('bg/fundo.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -158,7 +159,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
-            border: 1px solid rgba(160, 32, 240, 0.3);
+            
         }
 
         .nav-dot:hover::before {
@@ -204,8 +205,8 @@
         }
 
         .bio-text .highlight {
-            color: var(--purple-glow);
-            text-shadow: 0 0 20px rgba(160, 32, 240, 0.6);
+            color: white
+            
         }
 
         .bio-text .subtitle {
@@ -245,89 +246,104 @@
             transform: scale(1.05);
         }
 
-        /* card de linguagens */
-        .tech-stack-section { margin: 100px 0; }
-        .tech-stack-section h2 { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 60px; }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 40px;
-            padding: 30px;
-            justify-items: center;
-            max-width: 1000px;
-            margin: 0 auto;
+        /* Marquee Tech Stack */
+        .tech-stack-section {
+            margin: 100px 0;
+            overflow: hidden;
         }
 
-        .tech-card-individual {
-            width: 100%;
-            max-width: 180px;
-            height: 200px;
-            perspective: 1000px;
-        }
-
-        .tech-glass-card {
-            height: 100%;
-            padding-top: 30px;
-            border: 1px solid rgba(160, 32, 240, 0.3);
-            border-radius: 20px;
-
-            transform-style: preserve-3d;
-            background: linear-gradient(135deg, rgba(106, 17, 203, 0.05) 18.75%, transparent 0 31.25%, transparent 0),
-                        repeating-linear-gradient(45deg, rgba(160, 32, 240, 0.02) -6.25% 6.25%, rgba(255,255,255,0.01) 0 18.75%);
-            background-size: 60px 60px;
-            background-color: rgba(15, 15, 27, 0.8);
-            box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 30px -10px;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .tech-card-individual:hover .tech-glass-card {
-            background-position: -100px 100px, -100px 100px;
-            transform: rotate3d(0.5, 1, 0, 25deg);
-            /* Borda brilha no hover */
-            border-color: var(--purple-glow);
-            box-shadow: 0 0 20px rgba(160, 32, 240, 0.2);
-        }
-
-        .tech-glass-content {
-            background: transparent;
-            transition: all 0.5s ease-in-out;
-            padding: 20px;
-            transform-style: preserve-3d;
+        .tech-stack-section h2 {
             text-align: center;
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 60px;
+        }
+
+        .tech-marquee-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .tech-marquee-row {
+            display: flex;
+            gap: 80px;
+            width: fit-content;
+        }
+
+        .tech-marquee-row:first-child {
+            animation: scroll-left 30s linear infinite;
+        }
+
+        .tech-marquee-row:last-child {
+            animation: scroll-right 30s linear infinite;
+        }
+
+        .tech-marquee-row:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes scroll-right {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .tech-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100%;
+            gap: 15px;
+            min-width: 120px;
+            transition: transform 0.3s ease;
         }
 
-        .tech-glass-content i {
-            display: inline-block;
-            font-size: 3rem;
-            color: var(--purple-glow);
-            filter: drop-shadow(0 0 10px var(--purple-glow));
-            transition: all 0.5s ease-in-out;
-            transform: translate3d(0px, 0px, 50px);
+        .tech-item:hover {
+            transform: scale(1.2);
         }
 
-        .tech-name {
-            display: block;
-            margin-top: 15px;
+        .tech-item i {
+            font-size: 4rem;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item img {
+            width: 4rem;
+            height: 4rem;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+
+        .tech-item:hover i {
+            filter: brightness(1.3);
+        }
+
+        .tech-item:hover img {
+            filter: brightness(0) invert(1) brightness(1.3);
+        }
+
+        .tech-item span {
             color: #ffffff;
             font-size: 1rem;
-            font-weight: 900;
-            transition: all 0.5s ease-in-out;
-            transform: translate3d(0px, 0px, 30px);
-        }
-
-        .tech-card-individual:hover .tech-glass-content i {
-            transform: translate3d(0px, 0px, 100px);
-            color: var(--accent-lilac);
-        }
-
-        .tech-card-individual:hover .tech-name {
-            transform: translate3d(0px, 0px, 70px);
+            font-weight: 600;
+            text-align: center;
         }
 
         /* PROJECTS SECTION - NEW CAROUSEL STYLE */
@@ -342,17 +358,19 @@
             width: 100%;
             min-height: 600px;
             overflow: hidden;
-            padding-bottom: 120px;
+            padding-bottom: 100px;
+            margin-bottom: 40px;
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
         }
 
         .project-slide {
-            min-width: 100%;
+            width: 100vw;
+            max-width: 100%;
+            flex-shrink: 0;
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 80px;
@@ -416,7 +434,7 @@
 
         .project-link {
             padding: 14px 28px;
-            background: var(--purple-primary);
+            background: white;
             color: #ffffff;
             text-decoration: none;
             border-radius: 10px;
@@ -429,9 +447,9 @@
         }
 
         .project-link:hover {
-            background: var(--purple-glow);
+            background: white;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(160, 32, 240, 0.5);
+            
         }
 
         .media-showcase {
@@ -454,6 +472,7 @@
 
         .media-item {
             min-width: 100%;
+            flex-shrink: 0;
             height: 100%;
             display: flex;
             align-items: center;
@@ -462,9 +481,12 @@
         }
 
         .media-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
         }
 
         .media-item video {
@@ -480,7 +502,7 @@
             transform: translateY(-50%);
             background: rgba(0, 0, 0, 0.6);
             color: white;
-            border: 1px solid rgba(160, 32, 240, 0.3);
+            border: 1px solid rgba(150, 150, 150, 0.3);
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -505,17 +527,17 @@
         /* Bolinhas para navegar entre PROJETOS (embaixo) */
         .global-controls {
             position: absolute;
-            bottom: -80px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 12px;
             z-index: 100;
-            background: rgba(15, 15, 27, 0.8);
+            background: rgba(15, 15, 27, 0.95);
             padding: 15px 25px;
             border-radius: 30px;
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(160, 32, 240, 0.3);
+            border: 2px solid rgba(150, 150, 150, 0.5);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
@@ -523,22 +545,24 @@
             width: 14px;
             height: 14px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(150, 150, 150, 0.6);
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            border: 2px solid rgba(150, 150, 150, 0.8);
         }
 
         .project-dot:hover {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(180, 180, 180, 0.9);
             transform: scale(1.2);
+            border-color: rgba(200, 200, 200, 1);
         }
 
         .project-dot.active {
-            background: var(--purple-glow);
-            box-shadow: 0 0 15px var(--purple-glow);
+            background: rgba(200, 200, 200, 1);
             width: 40px;
             border-radius: 7px;
+            border-color: rgba(220, 220, 220, 1);
         }
 
         /* PROJECTS SECTION - OLD GRID STYLE (MANTIDO) */
@@ -551,9 +575,9 @@
             z-index: 0; position: relative; padding: 1rem; width: 300px; height: 350px;
             box-sizing: border-box; background: transparent; backdrop-filter: blur(40px);
             border-radius: 0px 2rem;
-            background-image: radial-gradient(#2121218a, #212121cc), linear-gradient(35deg, #1a0033 62%, var(--purple-glow) 100%);
+            background-image: radial-gradient(#2121218a, #212121cc), linear-gradient(35deg, #1a1a1a 62%, var(--purple-glow) 100%);
             background-origin: border-box; background-clip: content-box, border-box;
-            box-shadow: 1px 1px 2rem rgba(160, 32, 240, 0.4);
+            box-shadow: 1px 1px 2rem rgba(150, 150, 150, 0.4);
             transition: all 0.5s; animation: pulse_purple 3s infinite;
             cursor: pointer;
         }
@@ -561,7 +585,7 @@
         .card-bg {
             position: relative; box-sizing: border-box; width: 100%; height: 100%;
             overflow: hidden; border-radius: 0px 0.8rem;
-            background: linear-gradient(346.80deg, #0f0f1b 30%, #1a1a2e 30%, rgba(160, 32, 240, 0) 30%, rgba(160, 32, 240, 0) 32%, #0f0f1b 32%, #0f0f1b 35%, transparent 35%);
+            background: linear-gradient(346.80deg, #0f0f1b 30%, #1a1a2e 30%, rgba(150, 150, 150, 0) 30%, rgba(150, 150, 150, 0) 32%, #0f0f1b 32%, #0f0f1b 35%, transparent 35%);
         }
 
         #text-ext {
@@ -598,7 +622,7 @@
 
         .logo {
             position: absolute; width: 200%; height: 200%;
-            background: conic-gradient(var(--purple-primary) 0%, #fff 10%, var(--purple-glow) 25%, #1a0033 50%, var(--purple-primary) 70%, #e0aaff 90%);
+            background: conic-gradient(var(--purple-primary) 0%, #fff 10%, var(--purple-glow) 25%, #1a1a1a 50%, var(--purple-primary) 70%, #e0e0e0 90%);
             animation: spin 5s linear infinite;
         }
 
@@ -609,7 +633,7 @@
 
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes slide { from { transform: translate3d(var(--move-initial), 0, 0); } to { transform: translate3d(var(--move-final), 0, 0); } }
-        @keyframes pulse_purple { 0%, 100% { box-shadow: 0 0 1rem rgba(160, 32, 240, 0.4); } 70% { box-shadow: 0 0 2rem rgba(160, 32, 240, 0.6); } }
+        @keyframes pulse_purple { 0%, 100% { box-shadow: 0 0 1rem rgba(150, 150, 150, 0.4); } 70% { box-shadow: 0 0 2rem rgba(150, 150, 150, 0.6); } }
 
         /* MODAL */
         .modal {
@@ -628,7 +652,7 @@
         .profile-img-container {
             width: 120px; height: 120px; margin: 0 auto; border-radius: 50%;
             border: 3px solid var(--purple-glow); overflow: hidden;
-            box-shadow: 0 0 20px rgba(160, 32, 240, 0.6); background: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(150, 150, 150, 0.6); background: var(--bg-dark);
         }
         .profile-img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -637,10 +661,10 @@
         .experience-section h2 { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 60px; }
 
         .experience-container {
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
         }
 
@@ -656,6 +680,13 @@
             flex-direction: column;
             padding: 35px;
             box-sizing: border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
         }
 
         .experience-card .bg {
@@ -668,7 +699,12 @@
             background: rgba(15, 15, 27, 0.95);
             backdrop-filter: blur(24px);
             border-radius: 16px;
-            outline: 2px solid rgba(160, 32, 240, 0.3);
+            outline: 2px solid rgba(150, 150, 150, 0.3);
+            transition: outline-color 0.3s ease;
+        }
+
+        .experience-card:hover .bg {
+            outline-color: rgba(200, 200, 200, 0.5);
         }
 
         .experience-card .blob {
@@ -679,7 +715,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background-color: var(--purple-glow);
+            background-color: rgba(150, 150, 150, 0.5);
             opacity: 0.6;
             filter: blur(40px);
             animation: blob-bounce 8s infinite ease;
@@ -715,7 +751,7 @@
         }
 
         .experience-card h3 i {
-            color: var(--purple-glow);
+            color: #ffffff;
             font-size: 1.3rem;
         }
 
@@ -739,7 +775,7 @@
             content: "▹";
             position: absolute;
             left: 0;
-            color: var(--purple-glow);
+            color: #ffffff;
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -774,8 +810,10 @@
 
         <section class="tech-stack-section fullpage-section" id="section-1" data-scroll-section>
             <h2 data-scroll data-scroll="fade-up">Tech Stack & Skills</h2>
-            <div class="tech-grid" id="tech-stack-grid" data-scroll data-scroll="fade-up" data-scroll-delay="0.2">
-                </div>
+            <div class="tech-marquee-container" data-scroll data-scroll="fade-up" data-scroll-delay="0.2">
+                <div class="tech-marquee-row" id="tech-marquee-row-1"></div>
+                <div class="tech-marquee-row" id="tech-marquee-row-2"></div>
+            </div>
         </section>
 
         <!-- SEÇÃO DE PROJETOS COM CAROUSEL -->
@@ -828,7 +866,7 @@
             { name: "Next.js", icon: "fa-solid fa-n" },
             { name: "Node.js", icon: "fa-brands fa-node-js" },
             { name: "Python", icon: "fa-brands fa-python" },
-            { name: "Supabase", icon: "fa-solid fa-database" },
+            { name: "Supabase", icon: "iconSupa/icons8-supabase-48.png", isImage: true },
             { name: "PostgreSQL", icon: "fa-solid fa-database" },
             { name: "HTML", icon: "fa-brands fa-html5" },
             { name: "CSS", icon: "fa-brands fa-css3-alt" },
@@ -849,8 +887,7 @@
                     code: "#"
                 },
                 media: [
-                    { type: "image", src: "TalentsMulti/telaLoginMultiTalents.png" },
-                    { type: "image", src: "TalentsMulti/telaHomeMultiTalents.png" }
+                    { type: "image", src: "TalentsMulti/telaLoginMultiTalents.png" }
                 ]
             },
             {
@@ -863,9 +900,7 @@
                     code: "#"
                 },
                 media: [
-                    { type: "image", src: "DashBoard/dashboardLogin.png" },
-                    { type: "image", src: "DashBoard/teleInicial.png" },
-                    { type: "image", src: "DashBoard/registroEmpresa.png" }
+                    { type: "video", src: "DashBoard/dashboard.mp4" }
                 ]
             },
             {
@@ -878,7 +913,7 @@
                     code: "#"
                 },
                 media: [
-                    { type: "image", src: "https://via.placeholder.com/800x450/6a11cb/ffffff?text=MacDonald+Totem" }
+                    { type: "image", src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='800' height='450' fill='%236b7280'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='32' fill='%23ffffff'%3EMacDonald Totem%3C/text%3E%3C/svg%3E" }
                 ]
             },
             {
@@ -891,7 +926,7 @@
                     code: "#"
                 },
                 media: [
-                    { type: "image", src: "https://via.placeholder.com/800x450/a020f0/ffffff?text=Central+Aviso" }
+                    { type: "video", src: "centralDeAviso/Gravando 2026-01-20 154709.mp4" }
                 ]
             },
             {
@@ -904,7 +939,7 @@
                     code: "#"
                 },
                 media: [
-                    { type: "image", src: "https://via.placeholder.com/800x450/e0aaff/000000?text=Software+House" }
+                    { type: "video", src: "soft/software-house.mp4" }
                 ]
             },
             {
@@ -917,7 +952,7 @@
                     code: "#"
                 },
                 media: [
-                    { type: "image", src: "https://via.placeholder.com/800x450/6a11cb/ffffff?text=Pacman+Game" }
+                    { type: "video", src: "pacmen/pacmen.mp4" }
                 ]
             }
         ];
@@ -931,18 +966,22 @@
 
         // Renderizar slides dos projetos
         featuredProjects.forEach((project, index) => {
+
             const mediaHTML = project.media.map((item, mediaIndex) => {
                 if (item.type === 'image') {
                     return `<div class="media-item"><img src="${item.src}" alt="${project.title}"></div>`;
                 } else if (item.type === 'video') {
                     return `<div class="media-item"><video src="${item.src}" controls></video></div>`;
                 }
+                return '';
             }).join('');
 
             // Setas para navegar entre imagens (só aparecem se tiver mais de 1 imagem)
             const showMediaNav = project.media.length > 1 ? '' : 'style="display: none;"';
 
-            carouselTrack.innerHTML += `
+            const techPills = project.techs.map(tech => `<span class="tech-pill">${tech}</span>`).join('');
+
+            const slideHTML = `
                 <div class="project-slide">
                     <div class="project-info">
                         <span class="project-category">${project.category}</span>
@@ -951,7 +990,7 @@
                         <div>
                             <p class="built-with">Construído com:</p>
                             <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                                ${project.techs.map(tech => `<span class="tech-pill">${tech}</span>`).join('')}
+                                ${techPills}
                             </div>
                         </div>
                         <div class="project-links">
@@ -976,7 +1015,26 @@
                     </div>
                 </div>
             `;
+
+            carouselTrack.innerHTML += slideHTML;
         });
+
+        // Debug: verificar renderização
+        setTimeout(() => {
+            const slides = document.querySelectorAll('.project-slide');
+            console.log('🎯 PROJETOS RENDERIZADOS:', slides.length);
+            console.log('🎯 LARGURA TOTAL TRACK:', carouselTrack.scrollWidth);
+            console.log('🎯 LARGURA CONTAINER:', carouselTrack.parentElement.offsetWidth);
+            slides.forEach((slide, i) => {
+                console.log(`Projeto ${i}:`, slide.querySelector('h3').textContent);
+                const images = slide.querySelectorAll('.media-item img');
+                console.log(`  📸 Imagens encontradas: ${images.length}`);
+                images.forEach((img, imgIndex) => {
+                    console.log(`    Imagem ${imgIndex}: ${img.src}`);
+                    console.log(`    Dimensões: ${img.width}x${img.height}`);
+                });
+            });
+        }, 100);
 
         // Renderizar controles globais (dots dos projetos)
         featuredProjects.forEach((_, index) => {
@@ -1003,6 +1061,7 @@
             const wrapper = document.getElementById(`media-wrapper-${projectIndex}`);
             if (wrapper) {
                 wrapper.style.transform = `translateX(-${currentMediaIndexes[projectIndex] * 100}%)`;
+                console.log(`📸 Projeto ${projectIndex}: Navegando para imagem ${currentMediaIndexes[projectIndex]} de ${totalMedia}`);
             }
         }
 
@@ -1016,20 +1075,36 @@
             });
         }
 
-        // Renderizar Skills
-        const techGrid = document.getElementById('tech-stack-grid');
-        skills.forEach(skill => {
-            techGrid.innerHTML += `
-                <div class="tech-card-individual">
-                    <div class="tech-glass-card">
-                        <div class="tech-glass-content">
-                            <i class="${skill.icon}"></i>
-                            <span class="tech-name">${skill.name}</span>
-                        </div>
-                    </div>
+        // Renderizar Skills no Marquee (2 linhas)
+        const techMarqueeRow1 = document.getElementById('tech-marquee-row-1');
+        const techMarqueeRow2 = document.getElementById('tech-marquee-row-2');
+
+        // Dividir skills em duas linhas
+        const midPoint = Math.ceil(skills.length / 2);
+        const skillsRow1 = skills.slice(0, midPoint);
+        const skillsRow2 = skills.slice(midPoint);
+
+        // Função para criar HTML de skill
+        const createSkillHTML = (skill) => {
+            const iconHTML = skill.isImage
+                ? `<img src="${skill.icon}" alt="${skill.name}">`
+                : `<i class="${skill.icon}"></i>`;
+
+            return `
+                <div class="tech-item">
+                    ${iconHTML}
+                    <span>${skill.name}</span>
                 </div>
             `;
-        });
+        };
+
+        // Renderizar primeira linha (duplicada para loop infinito)
+        const row1HTML = skillsRow1.map(createSkillHTML).join('');
+        techMarqueeRow1.innerHTML = row1HTML + row1HTML;
+
+        // Renderizar segunda linha (duplicada para loop infinito)
+        const row2HTML = skillsRow2.map(createSkillHTML).join('');
+        techMarqueeRow2.innerHTML = row2HTML + row2HTML;
 
         // Código antigo de cards removido - agora tudo usa o carrossel
 
