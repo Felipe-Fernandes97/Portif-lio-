@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felipe Fernandes | Full Stack & AI Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     
     <style>
         :root {
@@ -17,19 +18,164 @@
             --accent-lilac: #e0aaff;
         }
 
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(107, 17, 203, 0.6) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(142, 30, 212, 0.3) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--text-main);
-            font-family: 'Segoe UI', sans-serif;
+        html {
             overflow-x: hidden;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Locomotive Scroll Container */
+        .smooth-scroll {
+            overflow: hidden;
+        }
+
+        .scroll-content {
+            background-color: var(--bg-dark);
+            background-image: url('bg/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Overlay escuro para melhorar legibilidade */
+        .scroll-content::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 8, 0.5);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* FULLPAGE SECTIONS */
+        .fullpage-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* REVEAL ON SCROLL ANIMATIONS */
+        [data-scroll] {
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        [data-scroll="fade-up"] {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        [data-scroll="fade-up"].is-inview {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        [data-scroll="fade-left"] {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        [data-scroll="fade-left"].is-inview {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        [data-scroll="fade-right"] {
+            opacity: 0;
+            transform: translateX(60px);
+        }
+
+        [data-scroll="fade-right"].is-inview {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        [data-scroll="scale"] {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        [data-scroll="scale"].is-inview {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* NAVEGAÇÃO LATERAL */
+        .side-nav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 15, 27, 0.95);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            border: 1px solid rgba(160, 32, 240, 0.3);
+        }
+
+        .nav-dot:hover::before {
+            opacity: 1;
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.3);
+        }
+
+        .nav-dot.active {
+            background: var(--purple-glow);
+            box-shadow: 0 0 15px var(--purple-glow);
+            width: 16px;
+            height: 16px;
+        }
 
         /* HERO SECTION - NOVO LAYOUT */
         .hero {
@@ -101,7 +247,7 @@
 
         /* card de linguagens */
         .tech-stack-section { margin: 100px 0; }
-        .tech-stack-section h2 { text-align: center; font-size: 2.5rem; color: var(--accent-lilac); margin-bottom: 60px; }
+        .tech-stack-section h2 { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 60px; }
 
         .tech-grid {
             display: grid;
@@ -168,7 +314,7 @@
         .tech-name {
             display: block;
             margin-top: 15px;
-            color: white;
+            color: #ffffff;
             font-size: 1rem;
             font-weight: 900;
             transition: all 0.5s ease-in-out;
@@ -233,7 +379,7 @@
         }
 
         .project-info .project-category {
-            color: var(--purple-glow);
+            color: #ffffff;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -242,19 +388,19 @@
 
         .project-info h3 {
             font-size: 2.5rem;
-            color: var(--accent-lilac);
+            color: #ffffff;
             margin: 0;
             line-height: 1.2;
         }
 
         .project-info p {
-            color: var(--text-main);
+            color: #ffffff;
             line-height: 1.8;
             font-size: 1.1rem;
         }
 
         .project-info .built-with {
-            color: var(--text-main);
+            color: #ffffff;
             font-weight: bold;
             margin-bottom: 10px;
             font-size: 0.9rem;
@@ -271,7 +417,7 @@
         .project-link {
             padding: 14px 28px;
             background: var(--purple-primary);
-            color: white;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 10px;
             transition: all 0.3s;
@@ -474,9 +620,10 @@
         .modal-content {
             background: #0f0f1b; width: 100%; max-width: 600px; padding: 40px;
             border-radius: 20px; border: 1px solid var(--purple-glow); position: relative;
+            color: #ffffff;
         }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--text-dim); }
-        .tech-pill { background: var(--purple-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; margin: 4px; display: inline-block; font-weight: bold; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #ffffff; }
+        .tech-pill { background: var(--purple-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; margin: 4px; display: inline-block; font-weight: bold; color: #ffffff; }
 
         .profile-img-container {
             width: 120px; height: 120px; margin: 0 auto; border-radius: 50%;
@@ -487,7 +634,7 @@
 
         /* EXPERIENCE SECTION - NOVO COM BLOB EFFECT */
         .experience-section { margin: 100px 0; }
-        .experience-section h2 { text-align: center; font-size: 2.5rem; color: var(--accent-lilac); margin-bottom: 60px; }
+        .experience-section h2 { text-align: center; font-size: 2.5rem; color: #ffffff; margin-bottom: 60px; }
 
         .experience-container {
             max-width: 900px;
@@ -559,7 +706,7 @@
         .experience-card h3 {
             position: relative;
             z-index: 3;
-            color: var(--accent-lilac);
+            color: #ffffff;
             font-size: 1.5rem;
             margin-bottom: 20px;
             display: flex;
@@ -581,7 +728,7 @@
         }
 
         .experience-card li {
-            color: var(--text-main);
+            color: #ffffff;
             padding: 10px 0;
             padding-left: 25px;
             position: relative;
@@ -600,41 +747,51 @@
 </head>
 <body>
 
-    <div class="container">
-        <section class="hero">
-            <div class="bio-text">
-                <h1>Felipe <span class="highlight">Fernandes</span></h1>
-                <p class="subtitle">Full Stack & Prompt Engineer</p>
-                <p>
+    <!-- NAVEGAÇÃO LATERAL -->
+    <nav class="side-nav">
+        <div class="nav-dot active" data-tooltip="Início" data-section="0"></div>
+        <div class="nav-dot" data-tooltip="Tech Stack" data-section="1"></div>
+        <div class="nav-dot" data-tooltip="Projetos" data-section="2"></div>
+        <div class="nav-dot" data-tooltip="Experiência" data-section="3"></div>
+    </nav>
+
+    <div class="smooth-scroll" data-scroll-container>
+        <div class="scroll-content">
+            <div class="container">
+        <section class="hero fullpage-section" id="section-0" data-scroll-section>
+            <div class="bio-text" data-scroll data-scroll="fade-left" data-scroll-speed="1">
+                <h1 data-scroll data-scroll="fade-up" data-scroll-delay="0.1">Felipe <span class="highlight">Fernandes</span></h1>
+                <p class="subtitle" data-scroll data-scroll="fade-up" data-scroll-delay="0.2">Full Stack & Prompt Engineer</p>
+                <p data-scroll data-scroll="fade-up" data-scroll-delay="0.3">
                     Crio experiências web modernas, acessíveis e seguras. Construo interfaces elegantes, resolvo desafios complexos de design e dou vida a ideias através de código limpo e escalável.
                 </p>
             </div>
 
-            <div class="hero-image-container">
+            <div class="hero-image-container" data-scroll data-scroll="fade-right" data-scroll-speed="2">
                 <img src="Faceimage/euteste.jpg" alt="Felipe Fernandes" class="hero-image">
             </div>
         </section>
 
-        <section class="tech-stack-section">
-            <h2>Tech Stack & Skills</h2>
-            <div class="tech-grid" id="tech-stack-grid">
+        <section class="tech-stack-section fullpage-section" id="section-1" data-scroll-section>
+            <h2 data-scroll data-scroll="fade-up">Tech Stack & Skills</h2>
+            <div class="tech-grid" id="tech-stack-grid" data-scroll data-scroll="fade-up" data-scroll-delay="0.2">
                 </div>
         </section>
 
         <!-- SEÇÃO DE PROJETOS COM CAROUSEL -->
-        <section class="project-showcase">
-            <h2 style="text-align: center; font-size: 2.5rem; color: var(--accent-lilac); margin-bottom: 80px;">Projetos</h2>
-            <div class="main-carousel-container">
+        <section class="project-showcase fullpage-section" id="section-2" data-scroll-section>
+            <h2 style="text-align: center; font-size: 2.5rem; color: white; margin-bottom: 80px;" data-scroll data-scroll="fade-up">Projetos</h2>
+            <div class="main-carousel-container" data-scroll data-scroll="scale" data-scroll-delay="0.2">
                 <div class="carousel-track" id="carousel-track"></div>
                 <!-- Bolinhas para navegar entre PROJETOS -->
                 <div class="global-controls" id="global-controls"></div>
             </div>
         </section>
 
-        <section class="experience-section">
-            <h2>Experiência Profissional</h2>
+        <section class="experience-section fullpage-section" id="section-3" data-scroll-section>
+            <h2 data-scroll data-scroll="fade-up">Experiência Profissional</h2>
             <div class="experience-container">
-                <div class="experience-card">
+                <div class="experience-card" data-scroll data-scroll="fade-left" data-scroll-delay="0.1">
                     <div class="bg"></div>
                     <div class="blob"></div>
                     <h3><i class="fa-solid fa-headset"></i>Suporte Técnico</h3>
@@ -645,7 +802,7 @@
                     </ul>
                 </div>
 
-                <div class="experience-card">
+                <div class="experience-card" data-scroll data-scroll="fade-right" data-scroll-delay="0.2">
                     <div class="bg"></div>
                     <div class="blob"></div>
                     <h3><i class="fa-solid fa-brain"></i>Suporte - Engenheiro de Prompt IA</h3>
@@ -657,9 +814,11 @@
                 </div>
             </div>
         </section>
+            </div>
+        </div>
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script>
         // Definição única das Skills
         const skills = [
@@ -873,6 +1032,143 @@
         });
 
         // Código antigo de cards removido - agora tudo usa o carrossel
+
+        // ===== LOCOMOTIVE SCROLL =====
+        let scroll;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            scroll = new LocomotiveScroll({
+                el: document.querySelector('[data-scroll-container]'),
+                smooth: true,
+                smoothMobile: false,
+                multiplier: 1.0,
+                lerp: 0.08,
+                class: 'is-inview',
+                scrollFromAnywhere: true,
+                touchMultiplier: 2,
+                tablet: {
+                    smooth: true,
+                    breakpoint: 1024
+                },
+                smartphone: {
+                    smooth: false
+                }
+            });
+
+            // Atualizar Locomotive após carregar imagens
+            const images = document.querySelectorAll('img');
+            let loadedImages = 0;
+
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedImages++;
+                    if (loadedImages === images.length) {
+                        scroll.update();
+                    }
+                } else {
+                    img.addEventListener('load', () => {
+                        loadedImages++;
+                        if (loadedImages === images.length) {
+                            scroll.update();
+                        }
+                    });
+                }
+            });
+
+            // Atualizar navegação lateral conforme scroll
+            const navDots = document.querySelectorAll('.nav-dot');
+            const sections = document.querySelectorAll('.fullpage-section');
+
+            scroll.on('scroll', (args) => {
+                const scrollY = args.scroll.y;
+
+                sections.forEach((section, index) => {
+                    const rect = section.getBoundingClientRect();
+                    const sectionTop = rect.top;
+                    const sectionHeight = rect.height;
+
+                    if (sectionTop <= window.innerHeight / 2 && sectionTop + sectionHeight > window.innerHeight / 2) {
+                        navDots.forEach((dot, i) => {
+                            dot.classList.toggle('active', i === index);
+                        });
+                    }
+                });
+            });
+
+            // Click nos dots da navegação lateral
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = document.getElementById(`section-${index}`);
+                    if (section) {
+                        scroll.scrollTo(section, {
+                            duration: 1000,
+                            easing: [0.25, 0.0, 0.35, 1.0]
+                        });
+                    }
+                });
+            });
+
+            // Navegação com teclado (setas)
+            let currentSection = 0;
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown' && currentSection < sections.length - 1) {
+                    e.preventDefault();
+                    currentSection++;
+                    scroll.scrollTo(sections[currentSection], {
+                        duration: 1000,
+                        easing: [0.25, 0.0, 0.35, 1.0]
+                    });
+                } else if (e.key === 'ArrowUp' && currentSection > 0) {
+                    e.preventDefault();
+                    currentSection--;
+                    scroll.scrollTo(sections[currentSection], {
+                        duration: 1000,
+                        easing: [0.25, 0.0, 0.35, 1.0]
+                    });
+                }
+            });
+
+            // SCROLL SNAPPING - Detectar quando parar de rolar e "travar" na seção mais próxima
+            let scrollTimeout;
+            let isScrolling = false;
+
+            scroll.on('scroll', (args) => {
+                isScrolling = true;
+                clearTimeout(scrollTimeout);
+
+                // Esperar 150ms após parar de rolar
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+
+                    // Encontrar a seção mais próxima do centro da viewport
+                    let closestSection = null;
+                    let closestDistance = Infinity;
+
+                    sections.forEach((section, index) => {
+                        const rect = section.getBoundingClientRect();
+                        const sectionCenter = rect.top + rect.height / 2;
+                        const viewportCenter = window.innerHeight / 2;
+                        const distance = Math.abs(sectionCenter - viewportCenter);
+
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestSection = { element: section, index: index };
+                        }
+                    });
+
+                    // Se a distância for significativa, fazer snap
+                    if (closestSection && closestDistance > 50) {
+                        currentSection = closestSection.index;
+                        scroll.scrollTo(closestSection.element, {
+                            duration: 600,
+                            easing: [0.25, 0.0, 0.35, 1.0],
+                            disableLerp: false
+                        });
+                    }
+                }, 150);
+            });
+        });
     </script>
 </body>
 </html>
