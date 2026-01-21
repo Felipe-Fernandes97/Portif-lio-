@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Felipe Fernandes | Full Stack & AI Engineer</title>
-    <link rel="icon" type="image/png" href="iconSupa/icons8-supabase-48.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     
@@ -120,6 +119,47 @@
         [data-scroll="scale"].is-inview {
             opacity: 1;
             transform: scale(1);
+        }
+
+        /* HEADER LINE */
+    
+
+        /* SOCIAL LINKS NO TOPO */
+        .social-links {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
         }
 
         /* NAVEGAÇÃO LATERAL */
@@ -434,7 +474,7 @@
 
         .project-link {
             padding: 14px 28px;
-            background: white;
+            background: transparent;
             color: #ffffff;
             text-decoration: none;
             border-radius: 10px;
@@ -444,12 +484,13 @@
             gap: 10px;
             font-size: 0.95rem;
             font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .project-link:hover {
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-3px);
-            
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .media-showcase {
@@ -647,7 +688,23 @@
             color: #ffffff;
         }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #ffffff; }
-        .tech-pill { background: var(--purple-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; margin: 4px; display: inline-block; font-weight: bold; color: #ffffff; }
+        .tech-pill {
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 4px;
+            display: inline-block;
+            font-weight: bold;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-pill:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+        }
 
         .profile-img-container {
             width: 120px; height: 120px; margin: 0 auto; border-radius: 50%;
@@ -783,6 +840,18 @@
 </head>
 <body>
 
+  
+
+    <!-- SOCIAL LINKS -->
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/felipe-fernandes-467435238/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/Felipe-Fernandes97" target="_blank" rel="noopener noreferrer" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+        </a>
+    </div>
+
     <!-- NAVEGAÇÃO LATERAL -->
     <nav class="side-nav">
         <div class="nav-dot active" data-tooltip="Início" data-section="0"></div>
@@ -832,8 +901,9 @@
                 <div class="experience-card" data-scroll data-scroll="fade-left" data-scroll-delay="0.1">
                     <div class="bg"></div>
                     <div class="blob"></div>
-                    <h3><i class="fa-solid fa-headset"></i>Suporte Técnico</h3>
+                    <h3><i class="fa-solid fa-headset"></i>Technical Support</h3>
                     <ul>
+                        <li><strong>Jul 2025 – Sep 2025</strong></li>
                         <li>Criação e configuração de Chatbot</li>
                         <li>Suporte às funcionalidades da plataforma</li>
                         <li>Treinamento de plataforma</li>
@@ -843,8 +913,10 @@
                 <div class="experience-card" data-scroll data-scroll="fade-right" data-scroll-delay="0.2">
                     <div class="bg"></div>
                     <div class="blob"></div>
-                    <h3><i class="fa-solid fa-brain"></i>Suporte - Engenheiro de Prompt IA</h3>
+                    <h3><i class="fa-solid fa-brain"></i>Support – AI Prompt Engineer</h3>
+
                     <ul>
+                        <li><strong>Nov 2025 – Present</strong></li>
                         <li>Manutenção e suporte técnico de soluções inteligentes</li>
                         <li>Desenvolvimento de sistemas internos que otimizam processos e melhoram a tomada de decisão</li>
                         <li>Criando e otimizando prompts para melhorar a performance</li>
@@ -883,11 +955,11 @@
                 desc: "Plataforma completa de recrutamento e seleção com automação de processos, análise de candidatos e dashboard gerencial. Sistema escalável construído com as melhores práticas de arquitetura.",
                 techs: ["NestJS", "Next.js", "Prisma", "PostgreSQL"],
                 links: {
-                    demo: "#",
-                    code: "#"
+                    demo: "https://github.com/wallaceluis/Talents-MultiOne",
+                    code: "https://talents-multi-one.vercel.app/auth"
                 },
                 media: [
-                    { type: "image", src: "TalentsMulti/telaLoginMultiTalents.png" }
+                    { type: "video", src: "TalentsMulti/talents.mp4" }
                 ]
             },
             {
@@ -896,8 +968,8 @@
                 desc: "Sistema de gerenciamento de empresas e atendimentos com visualização de dados em tempo real, métricas de performance e relatórios automatizados.",
                 techs: ["JavaScript", "Python", "Supabase", "Chart.js"],
                 links: {
-                    demo: "#",
-                    code: "#"
+                    demo: "https://github.com/Felipe-Fernandes97/CopyPlanilhas",
+                    code: "https://copydesh.vercel.app"
                 },
                 media: [
                     { type: "video", src: "DashBoard/dashboard.mp4" }
@@ -922,7 +994,7 @@
                 desc: "Aplicativo de comunicação integrada com efeitos 3D e interface moderna. Desenvolvido para facilitar a troca de informações em tempo real.",
                 techs: ["JavaScript", "HTML/CSS", "3D Effects"],
                 links: {
-                    demo: "#",
+                    demo: "https://github.com/Felipe-Fernandes97/Central-de-Aviso",
                     code: "#"
                 },
                 media: [
@@ -935,8 +1007,8 @@
                 desc: "Site institucional focado em serviços B2B para software house. Design clean e profissional com foco em conversão.",
                 techs: ["HTML/CSS", "JavaScript"],
                 links: {
-                    demo: "#",
-                    code: "#"
+                    demo: "https://github.com/Felipe-Fernandes97/Software-House",
+                    code: "https://software-house-flax.vercel.app"
                 },
                 media: [
                     { type: "video", src: "soft/software-house.mp4" }
@@ -948,8 +1020,8 @@
                 desc: "Jogo clássico Pacman reescrito para web usando Canvas API. Mecânicas fiéis ao original com performance otimizada.",
                 techs: ["JavaScript", "Canvas API", "Game Logic"],
                 links: {
-                    demo: "#",
-                    code: "#"
+                    demo: "https://github.com/Felipe-Fernandes97/Pacman",
+                    code: "https://pacman-three-iota.vercel.app"
                 },
                 media: [
                     { type: "video", src: "pacmen/pacmen.mp4" }
@@ -1098,13 +1170,13 @@
             `;
         };
 
-        // Renderizar primeira linha (duplicada para loop infinito)
+        // Renderizar primeira linha (triplicada para loop infinito sem espaços)
         const row1HTML = skillsRow1.map(createSkillHTML).join('');
-        techMarqueeRow1.innerHTML = row1HTML + row1HTML;
+        techMarqueeRow1.innerHTML = row1HTML + row1HTML + row1HTML;
 
-        // Renderizar segunda linha (duplicada para loop infinito)
+        // Renderizar segunda linha (triplicada para loop infinito sem espaços)
         const row2HTML = skillsRow2.map(createSkillHTML).join('');
-        techMarqueeRow2.innerHTML = row2HTML + row2HTML;
+        techMarqueeRow2.innerHTML = row2HTML + row2HTML + row2HTML;
 
         // Código antigo de cards removido - agora tudo usa o carrossel
 
@@ -1154,8 +1226,17 @@
             const navDots = document.querySelectorAll('.nav-dot');
             const sections = document.querySelectorAll('.fullpage-section');
 
+            const socialLinks = document.querySelector('.social-links');
+
             scroll.on('scroll', (args) => {
                 const scrollY = args.scroll.y;
+
+                // Hide social icons when scrolling down
+                if (scrollY > 100) {
+                    socialLinks.classList.add('hidden');
+                } else {
+                    socialLinks.classList.remove('hidden');
+                }
 
                 sections.forEach((section, index) => {
                     const rect = section.getBoundingClientRect();
