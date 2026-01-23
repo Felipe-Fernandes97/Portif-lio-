@@ -1075,6 +1075,9 @@
             <a href="https://github.com/Felipe-Fernandes97" target="_blank" rel="noopener noreferrer" title="GitHub">
                 <i class="fa-brands fa-github"></i>
             </a>
+            <a href="https://api.whatsapp.com/send/?phone=5519992536793&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
         </div>
     </div>
 
@@ -1096,7 +1099,7 @@
                             Prompt Engineer</p>
                         <p data-scroll data-scroll="fade-up" data-scroll-delay="0.2">
                             Crio experiências web modernas, acessíveis e seguras. Construo interfaces elegantes, resolvo
-                            desafios complexos de design e dou vida a ideias através de código limpo e escalável.
+                            desafios complexos de programação e dou vida a ideias através de código limpo e escalável.
                         </p>
                     </div>
 
@@ -1327,6 +1330,7 @@
                             <a href="${project.links.code}" class="project-link">
                                 <i class="fa-brands fa-github"></i> Código
                             </a>
+                            
                         </div>
                     </div>
                     <div class="media-showcase">
@@ -1349,9 +1353,10 @@
         // Debug: verificar renderização
         setTimeout(() => {
             const slides = document.querySelectorAll('.project-slide');
-            console.log('🎯 PROJETOS RENDERIZADOS:', slides.length);
-            console.log('🎯 LARGURA TOTAL TRACK:', carouselTrack.scrollWidth);
-            console.log('🎯 LARGURA CONTAINER:', carouselTrack.parentElement.offsetWidth);
+            console.log(' PROJETOS RENDERIZADOS:', slides.length);
+            console.log(' LARGURA TOTAL TRACK:', carouselTrack.scrollWidth);
+            console.log(' LARGURA CONTAINER:', carouselTrack.parentElement.offsetWidth);
+
             slides.forEach((slide, i) => {
                 console.log(`Projeto ${i}:`, slide.querySelector('h3').textContent);
                 const images = slide.querySelectorAll('.media-item img');
